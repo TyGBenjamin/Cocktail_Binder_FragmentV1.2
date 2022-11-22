@@ -1,6 +1,5 @@
 package com.example.cocktails_fragment.model.remote.dto
 
-
 /**
  * Drink recipe response.
  *

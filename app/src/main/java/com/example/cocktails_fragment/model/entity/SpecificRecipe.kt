@@ -86,7 +86,7 @@ data class SpecificRecipe(
     val strIngredient6: String,
     val strIngredient7: String,
     val strIngredient8: String? = "",
-    val strIngredient9: String? ="",
+    val strIngredient9: String? = "",
     val strInstructions: String,
     val strInstructionsDE: String? = "",
     val strInstructionsES: String? = "",

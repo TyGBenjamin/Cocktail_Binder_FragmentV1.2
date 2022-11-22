@@ -1,6 +1,5 @@
 package com.example.cocktails_fragment.viewmodel
 
-import androidx.compose.runtime.collectAsState
 import com.example.cocktails_fragment.model.entity.Drink
 import com.example.cocktails_fragment.model.repository.RepositoryImpl
 import com.example.cocktails_fragment.util.Resource
@@ -8,7 +7,8 @@ import com.example.cocktails_fragment.utilTest.CoroutinesTestExtension
 import io.mockk.coEvery
 import io.mockk.mockk
 import kotlinx.coroutines.test.runTest
-import org.junit.jupiter.api.Assertions.*
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.RegisterExtension
@@ -29,10 +29,9 @@ internal class CategoryListViewModelTest {
         val list = listOf(Drink(strCategory = ""))
         val fakeResponse = Resource.Success(list)
 
-        coEvery { repo.getCategoryList() } coAnswers {fakeResponse}
+        coEvery { repo.getCategoryList() } coAnswers { fakeResponse}
 
         val vm = CategoryListViewModel(repo)
-
 
         // Then
 //        assertFalse(state.isLoading)

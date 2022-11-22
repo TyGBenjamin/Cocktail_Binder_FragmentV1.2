@@ -46,6 +46,11 @@ import com.example.cocktails_fragment.viewmodel.DrinkByCategoryViewModel
 import com.example.cocktails_fragment.viewmodel.RecipeViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
+/**
+ * Dashboard fragment displays initial list of drinks retrieved from API.
+ *
+ * @constructor Create instance of [Dashboardfragment]
+ */
 @AndroidEntryPoint
 class DashboardFragment : Fragment() {
     private val dashViewModel by viewModels<CategoryListViewModel>()
@@ -57,7 +62,8 @@ class DashboardFragment : Fragment() {
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         // Inflate the layout for this fragment
@@ -90,36 +96,32 @@ class DashboardFragment : Fragment() {
     }
 }
 
-
-@Composable
-fun ShowList(drinks: List<Drink>) {
-    LazyColumn() {
-
-    }
-}
-
-
 @Composable
 fun CharCard(
     drink: Drink,
     navigate: () -> Unit,
-    viewModel: DrinkByCategoryViewModel,
+    viewModel: DrinkByCategoryViewModel
 ) {
-    Card(modifier = Modifier
-        .fillMaxWidth()
-        .background(color = Color.Black)
-        .clickable {
-            println(drink.strCategory)
-            viewModel.getDrinkByCategory(drink.strCategory)
-            println("Card has been CLICKED")
-            navigate()
+    Card(
+        modifier = Modifier
+            .fillMaxWidth()
+            .background(color = Color.Black)
+            .clickable {
+                println(drink.strCategory)
+                viewModel.getDrinkByCategory(drink.strCategory)
+                println("Card has been CLICKED")
+                navigate()
         }
-        .padding(5.dp)) {
+            .padding(
+                5.dp
+            )
+    ) {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(
-                    top = 20.dp, start = 10.dp
+                    top = 20.dp,
+                    start = 10.dp
                 )
         ) {
             Column(modifier = Modifier.padding(start = 15.dp, end = 15.dp)) {
@@ -136,28 +138,32 @@ fun CharCard(
     }
 }
 
-
 @Composable
 fun CharCard2(
     drink: DrinkByCategory,
     navigate: () -> Unit,
-    viewModel: RecipeViewModel,
+    viewModel: RecipeViewModel
 ) {
-    Card(modifier = Modifier
-        .fillMaxWidth()
-        .background(color = Color.Black)
-        .clickable {
-            println(drink.strDrink)
-            viewModel.getDetailRecipe(drink.strDrink)
-            println("Card has been CLICKED")
-            navigate()
-        }
-        .padding(5.dp)) {
+    Card(
+        modifier = Modifier
+            .fillMaxWidth()
+            .background(color = Color.Black)
+            .clickable {
+                println(drink.strDrink)
+                viewModel.getDetailRecipe(drink.strDrink)
+                println("Card has been CLICKED")
+                navigate()
+            }
+            .padding(
+            5.dp
+            )
+    ) {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(
-                    top = 20.dp, start = 10.dp
+                    top = 20.dp,
+                    start = 10.dp
                 )
         ) {
             Column(modifier = Modifier.padding(start = 15.dp, end = 15.dp)) {
@@ -177,7 +183,8 @@ fun CharCard2(
 @Composable
 fun ProgressIndicator() {
     Box(
-        modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center
+        modifier = Modifier.fillMaxSize(),
+        contentAlignment = Alignment.Center
     ) {
         CircularProgressIndicator()
     }
@@ -186,7 +193,8 @@ fun ProgressIndicator() {
 @Composable
 fun ErrorIndicator() {
     Box(
-        modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center
+        modifier = Modifier.fillMaxSize(),
+        contentAlignment = Alignment.Center
     ) {
         Text(text = "ERROR IS RETRIEVING DATA", fontSize = 40.sp)
     }
@@ -195,7 +203,8 @@ fun ErrorIndicator() {
 @Composable
 fun HomeScreen(
     viewModel: DrinkByCategoryViewModel = androidx.lifecycle.viewmodel.compose.viewModel(),
-    navigate: () -> Unit, drinks: List<Drink>
+    navigate: () -> Unit,
+    drinks: List<Drink>
 ) {
     LazyColumn(state = rememberLazyListState(), modifier = Modifier.padding(5.dp)) {
         items(items = drinks) { drink ->
@@ -211,7 +220,8 @@ fun HomeScreen(
 @Composable
 fun HomeScreen2(
     viewModel: RecipeViewModel = androidx.lifecycle.viewmodel.compose.viewModel(),
-    navigate: () -> Unit, drinks: List<DrinkByCategory>
+    navigate: () -> Unit,
+    drinks: List<DrinkByCategory>
 ) {
     LazyColumn(state = rememberLazyListState(), modifier = Modifier.padding(5.dp)) {
         items(items = drinks) { drink ->
@@ -223,4 +233,3 @@ fun HomeScreen2(
         }
     }
 }
-

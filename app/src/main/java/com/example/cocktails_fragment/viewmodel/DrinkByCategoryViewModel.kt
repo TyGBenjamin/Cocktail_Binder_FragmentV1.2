@@ -6,10 +6,10 @@ import com.example.cocktails_fragment.model.entity.DrinkByCategory
 import com.example.cocktails_fragment.model.repository.RepositoryImpl
 import com.example.cocktails_fragment.util.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
-import javax.inject.Inject
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 /**
  * Drink by category view model.
@@ -17,7 +17,7 @@ import kotlinx.coroutines.launch
  * @constructor Create empty Drink by category view model
  */
 @HiltViewModel
-class DrinkByCategoryViewModel@Inject constructor(private val repo: RepositoryImpl): ViewModel() {
+class DrinkByCategoryViewModel@Inject constructor(private val repo: RepositoryImpl) : ViewModel() {
 //    private val repo = RepositoryImpl
     private val _drinkList: MutableStateFlow<Resource<List<DrinkByCategory>>> = MutableStateFlow(Resource.Loading)
     val drinkList = _drinkList.asStateFlow()
@@ -27,7 +27,7 @@ class DrinkByCategoryViewModel@Inject constructor(private val repo: RepositoryIm
      *
      * @param list
      */
-    fun getDrinkByCategory(list:String ="cocktail"){
+    fun getDrinkByCategory(list: String = "cocktail") {
         viewModelScope.launch {
             _drinkList.value = repo.getSelectedCategoryDrinks(list)
             println("THIS IS VALUE OF FLOW ${repo.getCategoryList(list)}")

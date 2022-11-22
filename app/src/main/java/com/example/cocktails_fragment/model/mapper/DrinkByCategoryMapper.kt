@@ -3,7 +3,6 @@ package com.example.cocktails_fragment.model.mapper
 import com.example.cocktails_fragment.model.entity.DrinkByCategory
 import com.example.cocktails_fragment.model.remote.dto.DrinkByCategoryDTO
 
-
 /**
  * Drink Category Mapper mapper for mapping DTO to data class objects.
  *

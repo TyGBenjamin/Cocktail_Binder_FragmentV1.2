@@ -1,6 +1,5 @@
 package com.example.cocktails_fragment.model.remote.dto
 
-
 /**
  * Drink by category DTO for holding objects retrieved from API request.
  *
