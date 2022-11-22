@@ -42,9 +42,9 @@ import com.example.cocktails_fragment.viewmodel.RecipeViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 /**
- * Recipe fragment
+ * Recipe fragment displays sleetced drinks and associated recipes.
  *
- * @constructor Create empty Recipe fragment
+ * @constructor Create insatnce of  [Recipefragment]
  */
 @AndroidEntryPoint
 class RecipeFragment : Fragment() {
@@ -55,7 +55,8 @@ class RecipeFragment : Fragment() {
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         // Inflate the layout for this fragment
@@ -71,7 +72,7 @@ class RecipeFragment : Fragment() {
                         when (recipe) {
                             is Resource.Error -> ErrorIndicator()
                             Resource.Loading -> ProgressIndicator()
-                            is Resource.Success -> {
+                            is Resource.Success ->
                                 Column() {
                                     LazyColumn(modifier = Modifier.padding(5.dp)) {
                                         items(items = recipe.data) { recipe ->
@@ -84,12 +85,9 @@ class RecipeFragment : Fragment() {
                                             ) {
                                                 Text(text = "Home")
                                             }
-
                                         }
                                     }
                                 }
-
-                            }
                             else -> {}
                         }
                     }
@@ -99,64 +97,92 @@ class RecipeFragment : Fragment() {
     }
 }
 
-
 @Composable
 fun RecipeCard(
-    recipe: SpecificRecipe,
+    recipe: SpecificRecipe
 ) {
-    val (snackbarVisibleState, setSnackBarState) = remember { mutableStateOf(false) }
-    Card(modifier = Modifier
-        .fillMaxWidth()
-        .background(color = Color.Black)
-        .clickable {
-//            navigate()
-            setSnackBarState(!snackbarVisibleState)
-            println("Card has been   HERE ON NEW PAGE CLICKED")
-        }
-        .padding(5.dp)) {
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(
-                    top = 20.dp, start = 10.dp
-                )
-        ) {
-            Column(modifier = Modifier.padding(start = 15.dp, end = 15.dp)) {
-                Text(
-                    text = "CLICK ON THE CARD TO SEE RECIPE",
-                    modifier = Modifier.padding(vertical = 15.dp)
-                )
-                if (snackbarVisibleState) {
-                    Snackbar(
-
-                        action = {
-                            Button(onClick = {}) {
-                                Text("MyAction")
-                            }
-                        },
-                        modifier = Modifier.padding(8.dp)
-                    ) {
-                        Column() {
-
-                            Text(text = "you need" + " " + recipe.strIngredient1 + " and  " + recipe.strIngredient2)
-                            Text(text = "you need" + " " + recipe.strIngredient3 + " and " + recipe.strIngredient4)
-                            Text(text = "you need" + " " + recipe.strIngredient5 + " and " + recipe.strIngredient6)
-                            Text(text = "you need" + " " + recipe.strIngredient7 + " and " + recipe.strIngredient8)
-                        }
+    val (
+        snackbarVisibleState,
+        setSnackBarState
+    ) = remember { mutableStateOf(false) }
+    Card(
+        modifier = Modifier
+            .fillMaxWidth()
+            .background(color = Color.Black)
+            .clickable {
+                setSnackBarState(!snackbarVisibleState)
+                println("Card has been   HERE ON NEW PAGE CLICKED")
+            }
+            .padding(
+                5.dp
+            )
+    ) {
+        RecipeRowBuild(text = "CLICK ON THE CARD TO SEE RECIPE")
+        if (snackbarVisibleState) {
+            Snackbar(
+                modifier = Modifier.padding(8.dp)
+            ) {
+                Column() {
+                    RecipeText(s1 = recipe.strIngredient1, s2 = recipe.strIngredient2)
+                    RecipeText(s1 = recipe.strIngredient3, s2 = recipe.strIngredient4)
+                    RecipeText(s1 = recipe.strIngredient5, s2 = recipe.strIngredient6)
+                    recipe.strIngredient8?.let {
+                        RecipeText(
+                            s1 = recipe.strIngredient7,
+                            s2 = it
+                        )
                     }
                 }
-                Row {
-                    Text(text = recipe.strAlcoholic)
-                    Text(text = recipe.strCategory)
-                }
-                Text(text = recipe.strDrink)
-                Image(
-                    painter = rememberAsyncImagePainter(recipe.strDrinkThumb),
-                    contentDescription = "",
-                    modifier = Modifier.size(60.dp)
-                )
             }
+        }
+        RecipeBottom(
+            s1 = recipe.strAlcoholic,
+            s2 = recipe.strCategory,
+            drinkName = recipe.strDrink,
+            imageLink = recipe.strDrinkThumb
+        )
+    }
+}
+
+@Composable
+fun RecipeRowBuild(text: String) {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(
+                top = 20.dp,
+                start = 10.dp
+            )
+    ) {
+        Column(
+            modifier = Modifier.padding(
+                start = 15.dp,
+                end = 15.dp
+            )
+        ) {
+            Text(
+                text = text,
+                modifier = Modifier.padding(vertical = 15.dp)
+            )
         }
     }
 }
 
+@Composable
+fun RecipeBottom(s1: String, s2: String, drinkName: String, imageLink: String) {
+    Row {
+        Text(text = s1)
+        Text(text = s2)
+    }
+    Text(text = drinkName)
+    Image(
+        painter = rememberAsyncImagePainter(imageLink),
+        contentDescription = "",
+        modifier = Modifier.size(60.dp)
+    )
+}
+
+@Composable
+fun RecipeText(s1: String, s2: String) {
+    Text(text = "you need" + " " + s1 + " and  " + s2)
+}

@@ -1,7 +1,7 @@
 package com.example.cocktails_fragment.model.entity
 
 /**
- * Drink by category
+ * Drink by category.
  *
  * @property idDrink
  * @property strDrink

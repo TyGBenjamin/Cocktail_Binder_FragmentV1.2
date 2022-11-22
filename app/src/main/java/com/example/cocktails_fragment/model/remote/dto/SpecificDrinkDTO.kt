@@ -1,6 +1,5 @@
 package com.example.cocktails_fragment.model.remote.dto
 
-
 /**
  * Specific drink dTO.
  *

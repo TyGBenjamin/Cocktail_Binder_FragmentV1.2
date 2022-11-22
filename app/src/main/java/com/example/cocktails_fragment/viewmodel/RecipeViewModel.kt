@@ -7,10 +7,10 @@ import com.example.cocktails_fragment.model.entity.SpecificRecipe
 import com.example.cocktails_fragment.model.repository.RepositoryImpl
 import com.example.cocktails_fragment.util.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
-import javax.inject.Inject
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 /**
  * Recipe view model.
@@ -18,7 +18,7 @@ import kotlinx.coroutines.launch
  * @constructor Create empty Recipe view model
  */
 @HiltViewModel
-class RecipeViewModel@Inject constructor(private val repo: RepositoryImpl): ViewModel() {
+class RecipeViewModel@Inject constructor(private val repo: RepositoryImpl) : ViewModel() {
 //    private val repo = RepositoryImpl
     private val _recipe: MutableStateFlow<Resource<List<SpecificRecipe>>> = MutableStateFlow(
         Resource.Loading
@@ -42,4 +42,3 @@ class RecipeViewModel@Inject constructor(private val repo: RepositoryImpl): View
         const val TAG = "RecipeViewModelLgr"
     }
 }
-
