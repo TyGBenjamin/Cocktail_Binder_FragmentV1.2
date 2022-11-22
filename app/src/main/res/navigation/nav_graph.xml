@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/dashboardFragment"
-        android:name="com.example.cocktails_fragment.view.DashboardFragment"
+        android:name="com.example.cocktailsFragment.view.DashboardFragment"
         android:label="fragment_dashboard"
         tools:layout="@layout/fragment_dashboard" >
         <action
@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/categoryFragment"
-        android:name="com.example.cocktails_fragment.view.CategoryFragment"
+        android:name="com.example.cocktailsFragment.view.CategoryFragment"
         android:label="fragment_category"
         tools:layout="@layout/fragment_category" >
         <action
@@ -28,7 +28,7 @@
     </fragment>
     <fragment
         android:id="@+id/recipeFragment"
-        android:name="com.example.cocktails_fragment.view.RecipeFragment"
+        android:name="com.example.cocktailsFragment.view.RecipeFragment"
         android:label="fragment_recipe"
         tools:layout="@layout/fragment_recipe" >
         <action
@@ -37,6 +37,6 @@
     </fragment>
     <activity
         android:id="@+id/mainActivity"
-        android:name="com.example.cocktails_fragment.view.MainActivity"
+        android:name="com.example.cocktailsFragment.view.MainActivity"
         android:label="MainActivity" />
 </navigation>
