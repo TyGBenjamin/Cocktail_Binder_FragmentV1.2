@@ -64,7 +64,6 @@ class RecipeFragment : Fragment() {
             setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
             setContent {
                 val recipe = recipeViewModel.recipe.collectAsState().value
-                println("IS $recipe KEEPING ITS VALUE?")
                 Cocktails_FragmentTheme {
                     Surface(modifier = Modifier.fillMaxSize()) {
                         println("DRINKS ARE SHOWN AS $recipe")
@@ -111,7 +110,6 @@ fun RecipeCard(
             .background(color = Color.Black)
             .clickable {
                 setSnackBarState(!snackbarVisibleState)
-                println("Card has been   HERE ON NEW PAGE CLICKED")
             }
             .padding(
                 5.dp

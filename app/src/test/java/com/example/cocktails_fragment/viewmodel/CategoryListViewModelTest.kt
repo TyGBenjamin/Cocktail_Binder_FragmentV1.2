@@ -34,7 +34,6 @@ internal class CategoryListViewModelTest {
         val vm = CategoryListViewModel(repo)
 
         // Then
-//        assertFalse(state.isLoading)
         assertTrue(vm.categoryList.value is Resource.Loading)
         vm.getCategoryList()
 

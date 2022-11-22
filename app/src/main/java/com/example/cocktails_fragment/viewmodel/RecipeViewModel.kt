@@ -31,10 +31,8 @@ class RecipeViewModel@Inject constructor(private val repo: RepositoryImpl) : Vie
      * @param list
      */
     fun getDetailRecipe(list: String) {
-        Log.d(TAG, "getDetailRecipe called")
         viewModelScope.launch {
             _recipe.value = repo.getDrinkDetailRecipe(list)
-            Log.d(TAG, "Recipe Flow State: ${recipe.value}")
         }
     }
 

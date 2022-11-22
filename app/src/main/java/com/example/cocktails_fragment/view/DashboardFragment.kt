@@ -107,9 +107,7 @@ fun CharCard(
             .fillMaxWidth()
             .background(color = Color.Black)
             .clickable {
-                println(drink.strCategory)
                 viewModel.getDrinkByCategory(drink.strCategory)
-                println("Card has been CLICKED")
                 navigate()
         }
             .padding(
@@ -149,9 +147,7 @@ fun CharCard2(
             .fillMaxWidth()
             .background(color = Color.Black)
             .clickable {
-                println(drink.strDrink)
                 viewModel.getDetailRecipe(drink.strDrink)
-                println("Card has been CLICKED")
                 navigate()
             }
             .padding(

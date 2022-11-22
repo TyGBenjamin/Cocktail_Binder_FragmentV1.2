@@ -18,7 +18,6 @@ import javax.inject.Inject
  */
 @HiltViewModel
 class DrinkByCategoryViewModel@Inject constructor(private val repo: RepositoryImpl) : ViewModel() {
-//    private val repo = RepositoryImpl
     private val _drinkList: MutableStateFlow<Resource<List<DrinkByCategory>>> = MutableStateFlow(Resource.Loading)
     val drinkList = _drinkList.asStateFlow()
 
@@ -30,7 +29,6 @@ class DrinkByCategoryViewModel@Inject constructor(private val repo: RepositoryIm
     fun getDrinkByCategory(list: String = "cocktail") {
         viewModelScope.launch {
             _drinkList.value = repo.getSelectedCategoryDrinks(list)
-            println("THIS IS VALUE OF FLOW ${repo.getCategoryList(list)}")
         }
     }
 }
